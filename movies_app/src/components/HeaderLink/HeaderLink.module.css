@@ -1,0 +1,23 @@
+.link {
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.link__ligth {
+  color: #000;
+}
+  
+.link:hover {
+  color: #000
+}
+
+.link__ligth:hover {
+  color: #fff;
+}
+  
+.active {
+  color: #ffcd66;
+}
