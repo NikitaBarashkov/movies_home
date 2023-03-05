@@ -3,16 +3,12 @@ import cn from 'classnames';
 
 import s from './ChangeThemeBtn.module.css';
 
-export const ChangeThemeBtn = ({theme, changeTheme}) => {
+export const ChangeThemeBtn = ({theme, toggleTheme}) => {
   return (
     <button 
       type='button'
-      className={
-        theme
-        ? cn(s.btn, s.btn__ligth)
-        : s.btn
-      }
-      onClick={()=> changeTheme(!theme)}
+      className={ cn(s.btn, {[s.btn__light]: theme}) }
+      onClick={toggleTheme}
     /> 
   );
 };

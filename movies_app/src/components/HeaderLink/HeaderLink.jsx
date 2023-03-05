@@ -2,19 +2,21 @@ import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 
-import { setActiveLink } from '../../utilits/setActiveLink';
+import { setActiveLink } from '../../utilities/setActiveLink';
 import { useTheme } from '../../hooks/useTheme';
 
 import s from './HeaderLink.module.css';
 
 export const HeaderLink = ({ to, pagesName }) => {
-  const {isLigth} = useTheme();
+  const {isLight} = useTheme();
+
+  // const activeLInk = setActiveLink();
 
   return (
     <NavLink 
       className={
-        isLigth 
-        ? cn(s.link, s.link__ligth)
+        isLight 
+        ? cn(s.link, s.link__light)
         : setActiveLink
       } 
       to={to}

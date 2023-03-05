@@ -6,11 +6,11 @@ import { useTheme } from "../../../hooks/useTheme";
 import s from './MainPage.module.css';
 
 export const MainPage = () => {
-  const {isLigth} = useTheme();
+  const {isLight} = useTheme();
   
   return (
     <main className={s.main}>
-      <div className={isLigth ? cn(s.title, s.title__ligth): s.title}>
+      <div className={ cn(s.title, {[s.title__light]: isLight}) }>
         <h1>
           All your favorite movies in one place
         </h1>

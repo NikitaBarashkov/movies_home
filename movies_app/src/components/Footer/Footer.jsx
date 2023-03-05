@@ -6,11 +6,11 @@ import { ChangeThemeBtn } from '../ChangeThemeBtn/ChangeThemeBtn';
 import s from './Footer.module.css';
 
 export const Footer = () => {
-  const {isLigth, changeTheme} = useTheme();
+  const {isLight, toggleTheme} = useTheme();
 
   return (
-    <footer className={isLigth ? cn(s.footer, s.footer__ligth) : s.footer}>
-      <ChangeThemeBtn theme={isLigth} changeTheme={changeTheme} />
+    <footer className={ cn(s.footer, {[s.footer__light]: isLight}) }>
+      <ChangeThemeBtn theme={isLight} toggleTheme={toggleTheme} />
     </footer>
   );
 };

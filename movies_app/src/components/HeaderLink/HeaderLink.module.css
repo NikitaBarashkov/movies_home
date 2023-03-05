@@ -6,7 +6,7 @@
   transition: all 0.5s;
 }
 
-.link__ligth {
+.link__light {
   color: #000;
 }
   
@@ -14,7 +14,7 @@
   color: #000
 }
 
-.link__ligth:hover {
+.link__light:hover {
   color: #fff;
 }
   

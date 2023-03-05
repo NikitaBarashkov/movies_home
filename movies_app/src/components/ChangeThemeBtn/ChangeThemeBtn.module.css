@@ -17,11 +17,11 @@
   width: max-content;
 }
 
-.btn__ligth {
+.btn__light {
   background: #000;
   border-color: #c06aad;
 }
 
-.btn__ligth::after {
+.btn__light::after {
   color: #000;
 }
