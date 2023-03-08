@@ -1,0 +1,1 @@
+export const MOVIES_API_URL = 'http://www.omdbapi.com/?apikey=6215c723';
