@@ -36,3 +36,8 @@
   margin: 20px auto;
   flex-wrap: wrap;
 }
+
+.title__not_found {
+  color: #fff;
+  margin: 0 auto;
+}

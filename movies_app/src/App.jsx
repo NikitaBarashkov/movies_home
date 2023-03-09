@@ -6,6 +6,7 @@ import { Header } from './components/Header/Header';
 import { MainPage } from './components/containers/MainPage/MainPage';
 import { Footer } from './components/Footer/Footer'; 
 import { SearchPage } from './components/containers/SearchPage/SearchPage';
+import { SignInPage } from './components/containers/SignInPage/SignInPage';
 
 function App() { 
   return (
@@ -15,6 +16,7 @@ function App() {
         <Routes>
           <Route path='/' element={<MainPage />} />
           <Route path='/search' element={<SearchPage />} />
+          <Route path='/signin' element={<SignInPage />} />
         </Routes>        
         <Footer />
       </ThemeProvider>

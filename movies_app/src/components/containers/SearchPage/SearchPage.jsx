@@ -22,14 +22,13 @@ export const SearchPage = () => {
     changeTypeSearchGoal
   ] = useSearchGoal();
 
-  const [responseMovies, setResponseMovies] = useState(); 
+  const [responseMovies, setResponseMovies] = useState(null); 
   const [fullDataMovie, setFullDataMovie] = useState();
 
   const dispatch = useDispatch();
 
   const fetchMovies = async (e) => {
     e.preventDefault()
-
     let url = MOVIES_API_URL;
     
     if (searchGoal) {
@@ -41,17 +40,16 @@ export const SearchPage = () => {
     }
     
     const resp = await fetch(url);
-    const data = await resp.json();
+    const data = await resp.json();  
+    setResponseMovies(data);
 
     if (data.Response === 'True') {
       dispatch(addOnHistory({search: searchGoal, result: data.Search}))
-      setResponseMovies(data.Search);
     } 
-    console.log(data)   
   }
 
   const fetchFullInfoMovie = async(title) => {
-    const resp = await fetch(`http://www.omdbapi.com/?apikey=6215c723&t=${title}`);
+    const resp = await fetch(`${MOVIES_API_URL}&t=${title}`);
     const data = await resp.json();
     console.log(data)
     setFullDataMovie(data);
@@ -74,8 +72,10 @@ export const SearchPage = () => {
         />
       </section>
       <section className={s.response_section}>
-        {responseMovies 
-          ? responseMovies.map(movie => 
+        { !responseMovies 
+          ? null
+          : responseMovies.Response === 'True'
+          ? responseMovies.Search.map(movie => 
             <CardMovie 
               key={movie.imdbID} 
               title={movie.Title} 
@@ -83,7 +83,9 @@ export const SearchPage = () => {
               setInfoMovie={fetchFullInfoMovie}
             />
             )
-          : null   
+          : <h2 className={s.title__not_found}>
+              Nothing was found for your request
+            </h2>
         }
       </section>
     </main>

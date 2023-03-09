@@ -18,7 +18,7 @@ export const Header = () => {
           <HeaderLink to='/search' pagesName='Search' />
           <HeaderLink to='/favorite' pagesName='Favorite' />
           <div className={s.signBlock}>
-            <HeaderLink to='/signin' pagesName='Sign In' />
+            <HeaderLink to='/signin' pagesName='Sign In / Sign Up' />
           </div>
         </nav>
       </div>
