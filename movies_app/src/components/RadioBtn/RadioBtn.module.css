@@ -1,0 +1,55 @@
+.label {
+  content: '';
+  position: relative;
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  background: #fff;
+  border-radius: 15px;
+  border: 2px solid #000;
+  cursor: pointer;
+  margin-left: 15px;
+}
+  
+.label::before {
+  content: '';
+  display: inline-flex;
+  position: absolute;
+  left: 2.1px;
+  top: 2.1px;
+  width: 11px;
+  height: 11px;
+  opacity: 0;
+  border-radius: 15px;
+}
+  
+.label:first-of-type::after {
+  content: 'Movies';
+}
+
+.label:nth-of-type(2)::after {
+  content: 'Series';
+}
+  
+.label:last-of-type::after {
+  content: 'Movies & series';
+}
+  
+.label:first-of-type::after,
+.label:nth-of-type(2)::after,
+.label:last-of-type::after {
+  display: inline-block;
+  color: #cecede;
+  position: absolute;
+  left: 25px;
+  width: max-content;
+}
+  
+.radio {
+  display: none;
+}
+  
+.radio:checked + label::before {
+  opacity: 1;
+  background: #00cc7c;
+}

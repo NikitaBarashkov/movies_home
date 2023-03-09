@@ -1,0 +1,43 @@
+.main {
+  min-height: 100vh;
+  background: #1f3434;
+  display: flex;
+  flex-direction: column;
+}
+
+.main__light {
+  background: linear-gradient(#444, #555)
+}
+
+.search_section {
+  background: radial-gradient(black, transparent);
+  border-bottom: 1px solid #3e3e38;
+}
+
+.title {
+  text-align: center;
+  color: #fff;
+}
+
+.radio_container {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  margin: 30px auto 15px auto;
+  flex-direction: column;
+  gap: 10px;
+  width: 75%;
+}
+
+.response_section {
+  width: 90%;
+  display: flex;
+  gap: 2%;
+  margin: 20px auto;
+  flex-wrap: wrap;
+}
+
+.title__not_found {
+  color: #fff;
+  margin: 0 auto;
+}

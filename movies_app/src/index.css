@@ -9,6 +9,6 @@ body {
 }
 
 #root {
-  height: 100vh;
+  height: max-content;
 }
 
