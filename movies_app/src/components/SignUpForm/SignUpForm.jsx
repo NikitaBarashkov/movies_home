@@ -25,7 +25,7 @@ export const SignUpForm = () => {
     );
   };
 
-  const addInUsers = (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
 
     if (users.length === 0 || !isNotUnique()) {
@@ -46,7 +46,7 @@ export const SignUpForm = () => {
   };
 
   return (
-    <form className={s.form} onSubmit={addInUsers}>
+    <form className={s.form} onSubmit={onSubmit}>
       <fieldset className={s.fieldset}>
         <label className={s.label} htmlFor='name'>
           Your name:
@@ -55,7 +55,7 @@ export const SignUpForm = () => {
           className={s.input}
           type='text'
           id='name'
-          placeholder='Some name'
+          placeholder='name'
           autoFocus
           required
           value={username}
