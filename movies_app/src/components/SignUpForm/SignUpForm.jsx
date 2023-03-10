@@ -1,12 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { addUser } from '../../store/usersSlice';
 
+import { addUser } from '../../store/usersSlice';
+import { logIn } from '../../store/authorizationSlice';
 import { useAuth } from '../../hooks/useAuth';
 
 import s from './SignUpForm.module.css';
 
 export const SignUpForm = () => {
   const users = useSelector((store) => store.users.users);
+  const dispatch = useDispatch();
 
   const {
     username,
@@ -17,29 +19,27 @@ export const SignUpForm = () => {
     changePassword,
   } = useAuth();
 
-  const dispatch = useDispatch();
-
-  const isUnique = () => {
-    return users.some((user) => {
-      if (user.username === username) {
-        alert(`The user with the name ${username} already exists `);
-        return false;
-      } else if (user.email === email) {
-        alert(`The user with the mail ${email} already exists`);
-        return false;
-      }
-    });
+  const isNotUnique = () => {
+    return users.some(
+      (user) => user.username === username || user.email === email
+    );
   };
 
   const addInUsers = (e) => {
     e.preventDefault();
 
-    if (users.length === 0 || isUnique()) {
+    if (users.length === 0 || !isNotUnique()) {
       dispatch(
         addUser({
           username,
           email,
           password,
+        })
+      );
+      dispatch(
+        logIn({
+          isAuth: true,
+          user: username,
         })
       );
     }
@@ -58,7 +58,6 @@ export const SignUpForm = () => {
           placeholder='Some name'
           autoFocus
           required
-          autoComplete='name'
           value={username}
           onChange={changeUsername}
           minLength='3'

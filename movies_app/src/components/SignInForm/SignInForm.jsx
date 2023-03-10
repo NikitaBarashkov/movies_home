@@ -1,11 +1,15 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
+import { logIn } from '../../store/authorizationSlice';
+import { setLoginErrors } from '../../store/authorizationSlice';
 import { useAuth } from '../../hooks/useAuth';
 
 import s from '../SignUpForm/SignUpForm.module.css';
 
 export const SignInForm = () => {
   const users = useSelector((store) => store.users.users);
+  const loginErrors = useSelector((store) => store.authorization.wrongInput);
+  const dispatch = useDispatch();
 
   const {
     username: usernameOrEmail,
@@ -15,22 +19,38 @@ export const SignInForm = () => {
   } = useAuth();
 
   const checkUser = () => {
-    const res = users.some((user) => {
+    return users.find((user) => {
       return (
-        (usernameOrEmail === user.username && password === user.password) ||
-        (usernameOrEmail === user.email && password === user.password)
+        user.username === usernameOrEmail || user.email === usernameOrEmail
       );
     });
+  };
 
-    if (res) {
-      console.log(`Hello ${usernameOrEmail}`);
+  const letEntryUser = (e) => {
+    e.preventDefault();
+    const testRes = checkUser();
+
+    if (!testRes) {
+      dispatch(
+        setLoginErrors({
+          isWrong: true,
+          wrongValue: 'There is no such username or email',
+        })
+      );
+    } else if (testRes.password === password) {
+      dispatch(logIn({ isAuth: true, user: testRes.username }));
     } else {
-      console.log('Name, email or password wrong');
+      dispatch(
+        setLoginErrors({
+          isWrong: true,
+          wrongValue: 'Incorrect password',
+        })
+      );
     }
   };
 
   return (
-    <form className={s.form}>
+    <form className={s.form} onSubmit={letEntryUser}>
       <fieldset className={s.fieldset}>
         <label className={s.label} htmlFor='name'>
           Your name or email:
@@ -62,15 +82,12 @@ export const SignInForm = () => {
           minLength='5'
           maxLength='10'
         />
-        <button
-          type='button'
-          className={s.btn__submit}
-          onClick={() => {
-            console.log(users);
-            console.log(checkUser());
-          }}>
-          Sign In
-        </button>
+
+        <button className={s.btn__submit}>Sign In</button>
+
+        {loginErrors.isWrong && (
+          <p className={s.warning_title}>{loginErrors.wrongValue}</p>
+        )}
       </fieldset>
     </form>
   );

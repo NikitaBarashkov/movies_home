@@ -46,3 +46,11 @@
 .btn__submit:hover {
   background: #ffa600b8;
 }
+
+.warning_title {
+  background: #a12a2a;
+  padding: 5px;
+  border-radius: 5px;
+  color: #fff;
+  text-align: center;
+}
