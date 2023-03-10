@@ -1,0 +1,48 @@
+.form {
+  padding: 10px 30px;
+}
+
+.fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border: 1px solid #cdcdde;
+  box-shadow: 0px 3px 15px 3px #555;
+}
+
+.input {
+  padding: 5px;
+  border: 1px solid #cdcdde;
+  border-radius: 5px;
+}
+
+.input:focus {
+  outline: 1px solid #3ca68b;
+}
+
+.input:valid {
+  border: 1px solid #38cc2b;
+}
+
+.label {
+  margin-left: 5px;
+}
+
+.btn__submit {
+  width: 50%;
+  background: #ffcd6694;
+  border-radius: 5px;
+  border: 1px solid #ffcd66;
+  cursor: pointer;
+  height: 25px;
+  margin-top: 10px;
+  color: #222;
+  font-size: 0.9em;
+}
+
+.btn__submit:hover {
+  background: #ffa600b8;
+}
