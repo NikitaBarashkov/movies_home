@@ -39,6 +39,12 @@ export const SignInForm = () => {
       );
     } else if (testRes.password === password) {
       dispatch(logIn({ isAuth: true, user: testRes.username }));
+      dispatch(
+        setLoginErrors({
+          isWrong: false,
+          wrongValue: null,
+        })
+      );
     } else {
       dispatch(
         setLoginErrors({

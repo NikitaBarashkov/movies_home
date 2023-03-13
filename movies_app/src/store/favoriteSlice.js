@@ -7,8 +7,11 @@ export const favoriteSlice = createSlice({
     addOnFavorite: (state, action) => {
       state.favorite.push(action.payload);
     },
+    setFavorite: (state, action) => {
+      state.favorite = action.payload;
+    },
   },
 });
 
-export const { addOnFavorite } = favoriteSlice.actions;
+export const { addOnFavorite, setFavorite } = favoriteSlice.actions;
 export const favoriteReducer = favoriteSlice.reducer;

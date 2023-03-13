@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { initStore } from './store/initStoreSlice';
 
 import { ThemeProvider } from './providers/ThemeProvider';
 import { Header } from './components/Header/Header';
@@ -13,6 +15,9 @@ import { PrivateRoute } from './components/PrivateRoute/PrivateRoute';
 import { FullCardMovie } from './components/FullCardMovie/FullCardMovie';
 
 function App() {
+  const dispatch = useDispatch();
+  dispatch(initStore());
+
   return (
     <BrowserRouter>
       <ThemeProvider>
