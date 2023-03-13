@@ -1,0 +1,17 @@
+.link {
+  text-decoration: none;
+  color: #000;
+  width: 90%;
+  margin: 0 auto;
+  justify-content: space-around;
+  display: flex;
+}
+
+.item {
+  list-style: none;
+  height: 20px;
+  border: 1px solid #460c1d;
+  background: #e6f3f3;
+  padding: 8px;
+  width: 100%;
+}

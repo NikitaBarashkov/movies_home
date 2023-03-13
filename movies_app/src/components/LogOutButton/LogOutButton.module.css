@@ -1,0 +1,27 @@
+.btn {
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #f7f7f7;
+  background: transparent;
+  color: #fff;
+  font-size: 1.1em;
+  font-family: 'Times New Roman', serif;
+  cursor: pointer;
+}
+
+.btn:hover {
+  border-color: #000;
+  background: #c5c5c5;
+  color: #000;
+}
+
+.btn__light {
+  border-color: #000;
+  color: #000;
+}
+
+.btn__light:hover {
+  border-color: #fff;
+  color: #fff;
+  background: #bf6a7e;
+}

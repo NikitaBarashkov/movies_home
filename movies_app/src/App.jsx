@@ -4,11 +4,14 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './providers/ThemeProvider';
 import { Header } from './components/Header/Header';
 import { MainPage } from './components/containers/MainPage/MainPage';
-import { Footer } from './components/Footer/Footer'; 
+import { Footer } from './components/Footer/Footer';
 import { SearchPage } from './components/containers/SearchPage/SearchPage';
 import { SignInPage } from './components/containers/SignInPage/SignInPage';
+import { FavoritePage } from './components/containers/FavoritePage/FavoritePage';
+import { HistoryPage } from './components/containers/HistoryPage/HistoryPage';
+import { PrivateRoute } from './components/PrivateRoute/PrivateRoute';
 
-function App() { 
+function App() {
   return (
     <BrowserRouter>
       <ThemeProvider>
@@ -17,11 +20,15 @@ function App() {
           <Route path='/' element={<MainPage />} />
           <Route path='/search' element={<SearchPage />} />
           <Route path='/signin' element={<SignInPage />} />
-        </Routes>        
+          <Route element={<PrivateRoute />}>
+            <Route path='/favorite' element={<FavoritePage />} />
+            <Route path='/history' element={<HistoryPage />} />
+          </Route>
+        </Routes>
         <Footer />
       </ThemeProvider>
     </BrowserRouter>
-  )
+  );
 }
 
 export default App;
