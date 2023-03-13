@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 export const useSearchGoal = () => {
   const [searchGoal, setSearchGoal] = useState({
@@ -10,19 +10,15 @@ export const useSearchGoal = () => {
     setSearchGoal({
       ...searchGoal,
       titleMovie: e.target.value,
-    })
+    });
   };
-  
+
   const changeTypeSearchGoal = (e) => {
     setSearchGoal({
       ...searchGoal,
-      typeMovie: e.target.id
-    })
+      typeMovie: e.target.id,
+    });
   };
 
-  return [
-    searchGoal, 
-    changeTitleSearchGoal, 
-    changeTypeSearchGoal
-  ];
+  return [searchGoal, changeTitleSearchGoal, changeTypeSearchGoal];
 };
