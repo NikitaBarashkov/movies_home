@@ -1,0 +1,15 @@
+.main {
+  min-height: 100vh;
+  background: #1f3434;
+  display: flex;
+}
+
+.main__light {
+  background: linear-gradient(#444, #555);
+}
+
+.title {
+  color: #fff;
+  margin: 50px auto;
+  font-size: 1.3em;
+}
