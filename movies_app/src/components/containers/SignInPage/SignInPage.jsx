@@ -10,7 +10,7 @@ import { SignInForm } from '../../SignInForm/SignInForm';
 
 import s from './SignInPage.module.css';
 
-export const SignInPage = () => {
+const SignInPage = () => {
   const { isLight } = useTheme();
   const [isSignUp, changeCurrentForm] = useState(true);
   const isAuth = useSelector((store) => store.authorization.currentUser.isAuth);
@@ -44,3 +44,5 @@ export const SignInPage = () => {
     </main>
   );
 };
+
+export default SignInPage;

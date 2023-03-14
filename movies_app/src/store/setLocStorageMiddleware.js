@@ -30,7 +30,10 @@ export const setLocStorageMiddleware = (store) => (next) => (action) => {
     return result;
   }
 
-  if (action.type === 'favorite/addOnFavorite') {
+  if (
+    action.type === 'favorite/addOnFavorite' ||
+    action.type === 'favorite/removeFromFavorite'
+  ) {
     const result = next(action);
     const updateStore = store.getState();
 
