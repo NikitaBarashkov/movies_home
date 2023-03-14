@@ -5,7 +5,7 @@ import { StoryBox } from '../../StoryBox/StoryBox';
 
 import s from './HistoryPage.module.css';
 
-export const HistoryPage = () => {
+const HistoryPage = () => {
   const { isLight } = useTheme();
 
   return (
@@ -17,3 +17,5 @@ export const HistoryPage = () => {
     </main>
   );
 };
+
+export default HistoryPage;

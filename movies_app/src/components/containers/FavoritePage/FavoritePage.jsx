@@ -7,7 +7,7 @@ import { FavoriteCard } from './FavoriteCard';
 
 import s from './FavoritePage.module.css';
 
-export const FavoritePage = () => {
+const FavoritePage = () => {
   const { isLight } = useTheme();
   const { user } = useUser();
   const favorites = useSelector((store) => store.favorite.favorite);
@@ -33,3 +33,5 @@ export const FavoritePage = () => {
     </main>
   );
 };
+
+export default FavoritePage;
