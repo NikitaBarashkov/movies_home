@@ -14,10 +14,10 @@ export const StoryBox = () => {
   if (userHistory.length) {
     return (
       <ul>
-        {userHistory.map((story) => {
+        {userHistory.map((story, index) => {
           return (
             <StoryItem
-              key={story.search}
+              key={index}
               search={story.search}
               link={story.link}
               time={story.time}

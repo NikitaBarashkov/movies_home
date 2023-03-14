@@ -10,6 +10,7 @@ import { SignInPage } from './components/containers/SignInPage/SignInPage';
 import { FavoritePage } from './components/containers/FavoritePage/FavoritePage';
 import { HistoryPage } from './components/containers/HistoryPage/HistoryPage';
 import { PrivateRoute } from './components/PrivateRoute/PrivateRoute';
+import { FullCardMovie } from './components/FullCardMovie/FullCardMovie';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Routes>
           <Route path='/' element={<MainPage />} />
           <Route path='/search' element={<SearchPage />} />
+          <Route path='/search/:title' element={<FullCardMovie />} />
           <Route path='/signin' element={<SignInPage />} />
           <Route element={<PrivateRoute />}>
             <Route path='/favorite' element={<FavoritePage />} />

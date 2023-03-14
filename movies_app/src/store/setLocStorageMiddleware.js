@@ -30,5 +30,17 @@ export const setLocStorageMiddleware = (store) => (next) => (action) => {
     return result;
   }
 
+  if (action.type === 'favorite/addOnFavorite') {
+    const result = next(action);
+    const updateStore = store.getState();
+
+    localStorage.setItem(
+      'favorite',
+      JSON.stringify(updateStore.favorite.favorite)
+    );
+
+    return result;
+  }
+
   return next(action);
 };

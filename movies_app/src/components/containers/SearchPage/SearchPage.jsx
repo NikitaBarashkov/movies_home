@@ -4,12 +4,13 @@ import cn from 'classnames';
 import { useTheme } from '../../../hooks/useTheme';
 import { useSearchGoal } from '../../../hooks/useSearchGoal';
 import { useUser } from '../../../hooks/useUser';
-import { CardMovie } from '../../CardMovie/CardMovie';
 import { SearchForm } from '../../SearchForm/SearchForm';
 import { SearchOptionsForm } from '../../SearchOptionsForm/SearchOptionsForm';
+import { useGetMoviesQuery } from '../../../store/moviesAPI';
+import { CardsBlock } from './CardsBlock';
 import { MOVIES_API_URL } from '../../../utilities/constants';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addOnHistory } from '../../../store/historySlice';
 
 import s from './SearchPage.module.css';
@@ -17,50 +18,32 @@ import s from './SearchPage.module.css';
 export const SearchPage = () => {
   const { isLight } = useTheme();
   const { user: currentUser } = useUser();
-  const history = useSelector((store) => store.history.history);
+  const dispatch = useDispatch();
 
   const [searchGoal, changeTitleSearchGoal, changeTypeSearchGoal] =
     useSearchGoal();
 
-  const [responseMovies, setResponseMovies] = useState(null);
-  const [fullDataMovie, setFullDataMovie] = useState();
+  const [queryMovieValue, setQueryMovieValue] = useState(searchGoal);
 
-  const dispatch = useDispatch();
+  const { data: moviesResponse } = useGetMoviesQuery(queryMovieValue, {
+    skip: !queryMovieValue.titleMovie.length,
+  });
 
-  const fetchMovies = async (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
-    let url = MOVIES_API_URL;
+    setQueryMovieValue(searchGoal);
 
-    if (searchGoal) {
-      url += `&s=${searchGoal.titleMovie}`;
-    }
-
-    if (searchGoal.typeMovie !== 'both') {
-      url += `&t=${searchGoal.typeMovie}`;
-    }
-
-    const resp = await fetch(url);
-    const data = await resp.json();
-    setResponseMovies(data);
-
-    if (data.Response === 'True' && currentUser) {
+    if (currentUser) {
       dispatch(
         addOnHistory({
           username: currentUser,
           search: searchGoal.titleMovie,
           type: searchGoal.typeMovie,
-          link: url,
+          link: MOVIES_API_URL + `&s=${searchGoal.titleMovie}`,
           time: new Date().toLocaleString(),
         })
       );
     }
-  };
-
-  const fetchFullInfoMovie = async (title) => {
-    const resp = await fetch(`${MOVIES_API_URL}&t=${title}`);
-    const data = await resp.json();
-    console.log(data);
-    setFullDataMovie(data);
   };
 
   return (
@@ -74,26 +57,13 @@ export const SearchPage = () => {
         </div>
         <SearchForm
           value={searchGoal.titleMovie}
-          fetchMovies={fetchMovies}
+          onSubmit={onSubmit}
           changeValue={changeTitleSearchGoal}
           theme={isLight}
         />
       </section>
       <section className={s.response_section}>
-        {!responseMovies ? null : responseMovies.Response === 'True' ? (
-          responseMovies.Search.map((movie) => (
-            <CardMovie
-              key={movie.imdbID}
-              title={movie.Title}
-              url={movie.Poster}
-              setInfoMovie={fetchFullInfoMovie}
-            />
-          ))
-        ) : (
-          <h2 className={s.title__not_found}>
-            Nothing was found for your request
-          </h2>
-        )}
+        <CardsBlock movies={moviesResponse} />
       </section>
     </main>
   );
