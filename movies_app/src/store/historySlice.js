@@ -7,8 +7,11 @@ export const historySlice = createSlice({
     addOnHistory: (state, action) => {
       state.history.push(action.payload);
     },
+    setHistory: (state, action) => {
+      state.history = action.payload;
+    },
   },
 });
 
-export const { addOnHistory } = historySlice.actions;
+export const { addOnHistory, setHistory } = historySlice.actions;
 export const historyReducer = historySlice.reducer;

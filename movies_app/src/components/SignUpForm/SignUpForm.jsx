@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { addUser } from '../../store/usersSlice';
 import { logIn } from '../../store/authorizationSlice';
+import { setLoginErrors } from '../../store/authorizationSlice';
 import { useAuth } from '../../hooks/useAuth';
 
 import s from './SignUpForm.module.css';
@@ -40,6 +41,12 @@ export const SignUpForm = () => {
         logIn({
           isAuth: true,
           user: username,
+        })
+      );
+      dispatch(
+        setLoginErrors({
+          isWrong: false,
+          wrongValue: null,
         })
       );
     }
