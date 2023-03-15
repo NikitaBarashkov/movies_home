@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
 
 import { addUser } from '../../store/usersSlice';
 import { logIn } from '../../store/authorizationSlice';
@@ -10,6 +11,7 @@ import s from './SignUpForm.module.css';
 export const SignUpForm = () => {
   const users = useSelector((store) => store.users.users);
   const dispatch = useDispatch();
+  const [invalidValue, setInvalidValue] = useState(null);
 
   const {
     username,
@@ -50,6 +52,7 @@ export const SignUpForm = () => {
         })
       );
     }
+    setInvalidValue('This name or email is already registered');
   };
 
   return (
@@ -99,6 +102,8 @@ export const SignUpForm = () => {
           maxLength='10'
         />
         <button className={s.btn__submit}>Sign Up</button>
+
+        {invalidValue && <p className={s.warning_title}>{invalidValue}</p>}
       </fieldset>
     </form>
   );
