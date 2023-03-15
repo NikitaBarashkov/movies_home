@@ -1,0 +1,76 @@
+.main,
+.main_hofavorite {
+  min-height: 100vh;
+  background: #1f3434;
+  display: flex;
+  padding: 2%;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.main_hofavorite {
+  flex-direction: column;
+  padding: 0;
+}
+
+.main__light {
+  background: linear-gradient(#444, #555);
+}
+
+.title_page {
+  width: 90%;
+  margin: 30px auto;
+  color: #fff;
+}
+
+.title {
+  text-align: center;
+  color: #fff;
+}
+
+.card_container {
+  width: 15%;
+}
+
+.card_container:hover {
+  transform: scale(1.05);
+}
+
+.card {
+  height: 300px;
+  color: #000;
+  background: #fff;
+  border: 1px solid #fff;
+  border-radius: 5px 5px 0 0;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-decoration: none;
+}
+
+.poster {
+  border-radius: 5px 5px 0 0;
+  width: 100%;
+  min-height: 50%;
+}
+
+.title_movie {
+  font-size: 1.1em;
+  text-align: center;
+  padding: 5px;
+}
+
+.button {
+  width: 100%;
+  border: 1px solid #d0d19a;
+  background: #d35015;
+  padding: 5px;
+  border-radius: 0 0 5px 5px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.button:hover {
+  background: #e0601acc;
+}
