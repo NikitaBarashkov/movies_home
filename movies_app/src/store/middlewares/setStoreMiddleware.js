@@ -1,7 +1,7 @@
-import { logIn } from './authorizationSlice';
-import { setHistory } from './historySlice';
-import { setUsers } from './usersSlice';
-import { setFavorite } from './favoriteSlice';
+import { logIn } from '../authorizationSlice';
+import { setHistory } from '../historySlice';
+import { setUsers } from '../usersSlice';
+import { setFavorite } from '../favoriteSlice';
 
 export const setStoreMiddleware = (store) => (next) => (action) => {
   if (action.type === 'init/initStore') {

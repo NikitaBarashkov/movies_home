@@ -6,8 +6,8 @@ import { authReducer } from './authorizationSlice';
 import { favoriteReducer } from './favoriteSlice';
 import { initStoreReducer } from './initStoreSlice';
 
-import { setLocStorageMiddleware } from './setLocStorageMiddleware';
-import { setStoreMiddleware } from './setStoreMiddleware';
+import { setLocStorageMiddleware } from './middlewares/setLocStorageMiddleware';
+import { setStoreMiddleware } from './middlewares/setStoreMiddleware';
 import { moviesAPI } from './moviesAPI';
 
 export const store = configureStore({

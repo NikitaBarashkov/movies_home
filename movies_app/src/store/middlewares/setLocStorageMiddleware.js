@@ -1,7 +1,4 @@
 export const setLocStorageMiddleware = (store) => (next) => (action) => {
-  console.log('action.type', action.type);
-  console.log('store', store);
-
   if (
     action.type === 'authorized/logIn' ||
     action.type === 'authorized/logOut'

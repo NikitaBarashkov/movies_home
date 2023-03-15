@@ -1,17 +1,12 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
-import { addUser } from '../../store/usersSlice';
-import { logIn } from '../../store/authorizationSlice';
-import { setLoginErrors } from '../../store/authorizationSlice';
+import { useSignUp } from '../../hooks/useSignUp';
 import { useAuth } from '../../hooks/useAuth';
 
 import s from './SignUpForm.module.css';
 
 export const SignUpForm = () => {
-  const users = useSelector((store) => store.users.users);
-  const dispatch = useDispatch();
-  const [invalidValue, setInvalidValue] = useState(null);
+  const logUpErrors = useSelector((store) => store.authorization.invalidLogUp);
 
   const {
     username,
@@ -22,38 +17,7 @@ export const SignUpForm = () => {
     changePassword,
   } = useAuth();
 
-  const isNotUnique = () => {
-    return users.some(
-      (user) => user.username === username || user.email === email
-    );
-  };
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-
-    if (users.length === 0 || !isNotUnique()) {
-      dispatch(
-        addUser({
-          username,
-          email,
-          password,
-        })
-      );
-      dispatch(
-        logIn({
-          isAuth: true,
-          user: username,
-        })
-      );
-      dispatch(
-        setLoginErrors({
-          isWrong: false,
-          wrongValue: null,
-        })
-      );
-    }
-    setInvalidValue('This name or email is already registered');
-  };
+  const onSubmit = useSignUp(username, email, password);
 
   return (
     <form className={s.form} onSubmit={onSubmit}>
@@ -103,7 +67,9 @@ export const SignUpForm = () => {
         />
         <button className={s.btn__submit}>Sign Up</button>
 
-        {invalidValue && <p className={s.warning_title}>{invalidValue}</p>}
+        {logUpErrors.isWrong && (
+          <p className={s.warning_title}>{logUpErrors.wrongValue}</p>
+        )}
       </fieldset>
     </form>
   );
