@@ -21,6 +21,7 @@ export const StoryBox = () => {
               search={story.search}
               link={story.link}
               time={story.time}
+              type={story.type}
             />
           );
         })}

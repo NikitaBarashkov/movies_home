@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import cn from 'classnames';
 
 import { useTheme } from '../../../hooks/useTheme';
@@ -9,8 +10,6 @@ import { SearchOptionsForm } from '../../SearchOptionsForm/SearchOptionsForm';
 import { useGetMoviesQuery } from '../../../store/moviesAPI';
 import { CardsBlock } from './CardsBlock';
 import { MOVIES_API_URL } from '../../../utilities/constants';
-
-import { useDispatch } from 'react-redux';
 import { addOnHistory } from '../../../store/historySlice';
 
 import s from './SearchPage.module.css';
@@ -20,7 +19,7 @@ export const SearchPage = () => {
   const { user: currentUser } = useUser();
   const dispatch = useDispatch();
 
-  const [searchGoal, changeTitleSearchGoal, changeTypeSearchGoal] =
+  const { searchGoal, changeTitleSearchGoal, changeTypeSearchGoal } =
     useSearchGoal();
 
   const [queryMovieValue, setQueryMovieValue] = useState(searchGoal);
@@ -53,7 +52,10 @@ export const SearchPage = () => {
           <h2 className={s.title}>
             You can choose separately movies or series and both
           </h2>
-          <SearchOptionsForm changeSearchType={changeTypeSearchGoal} />
+          <SearchOptionsForm
+            changeSearchType={changeTypeSearchGoal}
+            typeMovie={searchGoal.typeMovie}
+          />
         </div>
         <SearchForm
           value={searchGoal.titleMovie}
