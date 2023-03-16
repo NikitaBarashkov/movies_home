@@ -1,9 +1,16 @@
 export const setLocStorageMiddleware = (store) => (next) => (action) => {
   if (
-    action.type === 'authorized/logIn' ||
+    action.type === 'authorized/correctAuthorization' ||
     action.type === 'authorized/logOut'
   ) {
-    localStorage.setItem('currentUser', JSON.stringify(action.payload));
+    const result = next(action);
+    const updateStore = store.getState();
+
+    localStorage.setItem(
+      'currentUser',
+      JSON.stringify(updateStore.authorization.currentUser)
+    );
+    return result;
   }
 
   if (action.type === 'users/addUser') {

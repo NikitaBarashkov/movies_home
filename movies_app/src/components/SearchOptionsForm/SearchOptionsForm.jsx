@@ -5,13 +5,11 @@ import { RadioBtn } from '../RadioBtn/RadioBtn';
 import s from './SearchOptionsForm.module.css';
 
 export const SearchOptionsForm = ({ changeSearchType, typeMovie }) => {
-  const setChecked = (radioType) => (typeMovie === radioType ? true : false);
-
   return (
     <form className={s.form} onChange={changeSearchType}>
-      <RadioBtn id='movies' isChecked={setChecked('movies')} />
-      <RadioBtn id='series' isChecked={setChecked('series')} />
-      <RadioBtn id='both' isChecked={setChecked('both')} />
+      <RadioBtn id='movies' isChecked={typeMovie === 'movies' ? true : false} />
+      <RadioBtn id='series' isChecked={typeMovie === 'series' ? true : false} />
+      <RadioBtn id='both' isChecked={typeMovie === 'both' ? true : false} />
     </form>
   );
 };

@@ -10,11 +10,11 @@ import s from './LogOutButton.module.css';
 export const LogOutButton = () => {
   const dispatch = useDispatch();
   const { isLight } = useTheme();
-  const { changeSearchGoal } = useSearchGoal();
+  const { resetSearchGoal } = useSearchGoal();
 
   const onClick = () => {
-    dispatch(logOut({ isAuth: false, user: null }));
-    changeSearchGoal('', 'both');
+    dispatch(logOut());
+    resetSearchGoal();
   };
 
   return (

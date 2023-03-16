@@ -11,6 +11,7 @@ import { useGetMoviesQuery } from '../../../store/moviesAPI';
 import { CardsBlock } from './CardsBlock';
 import { MOVIES_API_URL } from '../../../utilities/constants';
 import { addOnHistory } from '../../../store/historySlice';
+import { Preloader } from '../../Preloader/Preloader';
 
 import s from './SearchPage.module.css';
 
@@ -24,9 +25,12 @@ export const SearchPage = () => {
 
   const [queryMovieValue, setQueryMovieValue] = useState(searchGoal);
 
-  const { data: moviesResponse } = useGetMoviesQuery(queryMovieValue, {
-    skip: !queryMovieValue.titleMovie.length,
-  });
+  const { data: moviesResponse, isFetching } = useGetMoviesQuery(
+    queryMovieValue,
+    {
+      skip: !queryMovieValue.titleMovie.length,
+    }
+  );
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -65,7 +69,7 @@ export const SearchPage = () => {
         />
       </section>
       <section className={s.response_section}>
-        <CardsBlock movies={moviesResponse} />
+        {isFetching ? <Preloader /> : <CardsBlock movies={moviesResponse} />}
       </section>
     </main>
   );

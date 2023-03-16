@@ -26,6 +26,10 @@ export const SearchProvider = ({ children }) => {
     setSearchGoal({ titleMovie: title, typeMovie: type });
   };
 
+  const resetSearchGoal = () => {
+    setSearchGoal({ titleMovie: '', typeMovie: 'both' });
+  };
+
   return (
     <ContextSearchParams.Provider
       value={{
@@ -33,6 +37,7 @@ export const SearchProvider = ({ children }) => {
         changeTitleSearchGoal,
         changeTypeSearchGoal,
         changeSearchGoal,
+        resetSearchGoal,
       }}>
       {children}
     </ContextSearchParams.Provider>

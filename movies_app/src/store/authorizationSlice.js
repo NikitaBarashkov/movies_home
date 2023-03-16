@@ -15,11 +15,8 @@ export const authorizationSlice = createSlice({
   },
 
   reducers: {
-    logIn(state, action) {
-      Object.assign(state.currentUser, action.payload);
-    },
-    logOut(state, action) {
-      Object.assign(state.currentUser, action.payload);
+    logOut(state) {
+      state.currentUser = { isAuth: false, user: null };
     },
     setLogInErrors(state, action) {
       Object.assign(state.invalidLogIn, action.payload);
@@ -27,10 +24,18 @@ export const authorizationSlice = createSlice({
     setLogUpErrors(state, action) {
       Object.assign(state.invalidLogUp, action.payload);
     },
+    correctAuthorization(state, action) {
+      state.invalidLogIn = { isWrong: false, wrongValue: null };
+      state.invalidLogUp = { isWrong: false, wrongValue: null };
+      state.currentUser = {
+        isAuth: true,
+        user: action.payload,
+      };
+    },
   },
 });
 
-export const { logIn, logOut, setLogInErrors, setLogUpErrors } =
+export const { logOut, setLogInErrors, setLogUpErrors, correctAuthorization } =
   authorizationSlice.actions;
 
 export const authReducer = authorizationSlice.reducer;

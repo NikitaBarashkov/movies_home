@@ -1,12 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux';
 
 import { addUser } from '../store/usersSlice';
-import { logIn } from '../store/authorizationSlice';
-import { setLogInErrors, setLogUpErrors } from '../store/authorizationSlice';
+import { correctAuthorization } from '../store/authorizationSlice';
+import { setLogUpErrors } from '../store/authorizationSlice';
+import { useSearchGoal } from './useSearchGoal';
 
 export const useSignUp = (username, email, password) => {
   const users = useSelector((store) => store.users.users);
   const dispatch = useDispatch();
+  const { resetSearchGoal } = useSearchGoal();
 
   const isNotUnique = () => {
     return users.some(
@@ -17,12 +19,8 @@ export const useSignUp = (username, email, password) => {
   return (e) => {
     e.preventDefault();
 
-    const withoutErrors = {
-      isWrong: false,
-      wrongValue: null,
-    };
-
     if (users.length === 0 || !isNotUnique()) {
+      dispatch(correctAuthorization(username));
       dispatch(
         addUser({
           username,
@@ -30,14 +28,7 @@ export const useSignUp = (username, email, password) => {
           password,
         })
       );
-      dispatch(
-        logIn({
-          isAuth: true,
-          user: username,
-        })
-      );
-      dispatch(setLogInErrors(withoutErrors));
-      dispatch(setLogUpErrors(withoutErrors));
+      resetSearchGoal();
     } else {
       dispatch(
         setLogUpErrors({

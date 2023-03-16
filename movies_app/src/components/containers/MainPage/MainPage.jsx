@@ -1,5 +1,4 @@
 import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import cn from 'classnames';
 
 import { useTheme } from '../../../hooks/useTheme';
@@ -7,10 +6,6 @@ import { useTheme } from '../../../hooks/useTheme';
 import s from './MainPage.module.css';
 
 export const MainPage = () => {
-  const user = useSelector((store) => store.authorization.currentUser);
-
-  console.log(user);
-
   const { isLight } = useTheme();
 
   return (

@@ -1,11 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { logIn } from '../store/authorizationSlice';
-import { setLogInErrors, setLogUpErrors } from '../store/authorizationSlice';
+import { correctAuthorization } from '../store/authorizationSlice';
+import { setLogInErrors } from '../store/authorizationSlice';
+import { useSearchGoal } from './useSearchGoal';
 
 export const useSignIn = (usernameOrEmail, password) => {
   const dispatch = useDispatch();
   const users = useSelector((store) => store.users.users);
+  const { resetSearchGoal } = useSearchGoal();
 
   const checkUser = () => {
     return users.find((user) => {
@@ -19,11 +21,6 @@ export const useSignIn = (usernameOrEmail, password) => {
     e.preventDefault();
     const testRes = checkUser();
 
-    const withoutErrors = {
-      isWrong: false,
-      wrongValue: null,
-    };
-
     if (!testRes) {
       dispatch(
         setLogInErrors({
@@ -32,9 +29,8 @@ export const useSignIn = (usernameOrEmail, password) => {
         })
       );
     } else if (testRes.password === password) {
-      dispatch(logIn({ isAuth: true, user: testRes.username }));
-      dispatch(setLogInErrors(withoutErrors));
-      dispatch(setLogUpErrors(withoutErrors));
+      dispatch(correctAuthorization(testRes.username));
+      resetSearchGoal();
     } else {
       dispatch(
         setLogInErrors({
