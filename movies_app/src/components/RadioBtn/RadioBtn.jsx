@@ -21,7 +21,3 @@ RadioBtn.propTypes = {
   id: PropTypes.string,
   isChecked: PropTypes.bool,
 };
-
-RadioBtn.defaultProps = {
-  isChecked: false,
-};

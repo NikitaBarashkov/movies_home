@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
+import { SearchProvider } from './providers/SearchProvider';
 import { useInitApp } from './hooks/useInitApp';
 import { ThemeProvider } from './providers/ThemeProvider';
 import { Header } from './components/Header/Header';
@@ -28,22 +29,24 @@ function App() {
   return (
     <BrowserRouter>
       <ThemeProvider>
-        <Header />
-        <ErrorBoundary>
-          <Suspense fallback={<Preloader />}>
-            <Routes>
-              <Route path='/' element={<MainPage />} />
-              <Route path='/search' element={<SearchPage />} />
-              <Route path='/search/:title' element={<FullCardMovie />} />
-              <Route path='/signin' element={<SignInPage />} />
-              <Route element={<PrivateRoute />}>
-                <Route path='/favorite' element={<FavoritePage />} />
-                <Route path='/history' element={<HistoryPage />} />
-              </Route>
-            </Routes>
-          </Suspense>
-        </ErrorBoundary>
-        <Footer />
+        <SearchProvider>
+          <Header />
+          <ErrorBoundary>
+            <Suspense fallback={<Preloader />}>
+              <Routes>
+                <Route path='/' element={<MainPage />} />
+                <Route path='/search' element={<SearchPage />} />
+                <Route path='/search/:title' element={<FullCardMovie />} />
+                <Route path='/signin' element={<SignInPage />} />
+                <Route element={<PrivateRoute />}>
+                  <Route path='/favorite' element={<FavoritePage />} />
+                  <Route path='/history' element={<HistoryPage />} />
+                </Route>
+              </Routes>
+            </Suspense>
+          </ErrorBoundary>
+          <Footer />
+        </SearchProvider>
       </ThemeProvider>
     </BrowserRouter>
   );

@@ -1,14 +1,11 @@
 import { useSelector } from 'react-redux';
 
-import { useUser } from './useUser';
+import { selectUserMovies } from '../store/selectors/selectors';
 
 export const useHasInFavorites = (movieTitle) => {
-  const { user } = useUser();
+  const movies = useSelector(selectUserMovies);
 
-  const allMovies = useSelector((store) => store.favorite.favorite);
-  const userMovies = allMovies.filter((movie) => movie.username === user);
+  if (!movies.length) return false;
 
-  if (!allMovies.length || !userMovies.length) return false;
-
-  return userMovies.find((movie) => movie.movie.title === movieTitle);
+  return movies.find((movie) => movie.movie.title === movieTitle);
 };

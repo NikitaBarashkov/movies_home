@@ -1,15 +1,12 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-import { logIn } from '../../store/authorizationSlice';
-import { setLoginErrors } from '../../store/authorizationSlice';
 import { useAuth } from '../../hooks/useAuth';
+import { useSignIn } from '../../hooks/useSignIn';
 
 import s from '../SignUpForm/SignUpForm.module.css';
 
 export const SignInForm = () => {
-  const users = useSelector((store) => store.users.users);
-  const loginErrors = useSelector((store) => store.authorization.wrongInput);
-  const dispatch = useDispatch();
+  const loginErrors = useSelector((store) => store.authorization.invalidLogIn);
 
   const {
     username: usernameOrEmail,
@@ -18,45 +15,10 @@ export const SignInForm = () => {
     changePassword,
   } = useAuth();
 
-  const checkUser = () => {
-    return users.find((user) => {
-      return (
-        user.username === usernameOrEmail || user.email === usernameOrEmail
-      );
-    });
-  };
-
-  const letEntryUser = (e) => {
-    e.preventDefault();
-    const testRes = checkUser();
-
-    if (!testRes) {
-      dispatch(
-        setLoginErrors({
-          isWrong: true,
-          wrongValue: 'There is no such username or email',
-        })
-      );
-    } else if (testRes.password === password) {
-      dispatch(logIn({ isAuth: true, user: testRes.username }));
-      dispatch(
-        setLoginErrors({
-          isWrong: false,
-          wrongValue: null,
-        })
-      );
-    } else {
-      dispatch(
-        setLoginErrors({
-          isWrong: true,
-          wrongValue: 'Incorrect password',
-        })
-      );
-    }
-  };
+  const onSubmit = useSignIn(usernameOrEmail, password);
 
   return (
-    <form className={s.form} onSubmit={letEntryUser}>
+    <form className={s.form} onSubmit={onSubmit}>
       <fieldset className={s.fieldset}>
         <label className={s.label} htmlFor='name'>
           Your name or email:

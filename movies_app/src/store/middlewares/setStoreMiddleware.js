@@ -1,7 +1,7 @@
-import { logIn } from './authorizationSlice';
-import { setHistory } from './historySlice';
-import { setUsers } from './usersSlice';
-import { setFavorite } from './favoriteSlice';
+import { correctAuthorization } from '../authorizationSlice';
+import { setHistory } from '../historySlice';
+import { setUsers } from '../usersSlice';
+import { setFavorite } from '../favoriteSlice';
 
 export const setStoreMiddleware = (store) => (next) => (action) => {
   if (action.type === 'init/initStore') {
@@ -11,7 +11,7 @@ export const setStoreMiddleware = (store) => (next) => (action) => {
     const history = JSON.parse(localStorage.getItem('history'));
 
     if (currentUser?.user) {
-      store.dispatch(logIn(currentUser));
+      store.dispatch(correctAuthorization(currentUser.user));
     }
 
     if (history?.length) {
